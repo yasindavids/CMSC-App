@@ -13,6 +13,10 @@ namespace _10269809_PROG6212_POE.Controllers
             _logger = logger;
         }
 
+        public ActionResult LogIn()
+        {
+            return View();
+        }
         public ActionResult SignUp()
         {
            

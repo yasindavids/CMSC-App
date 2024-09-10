@@ -2,6 +2,73 @@ html {
   font-size: 14px;
 }
 
+.form-box {
+    max-width: 300px;
+    background: #f1f7fe;
+    overflow: hidden;
+    border-radius: 16px;
+    color: #010101;
+}
+
+.form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 24px 24px;
+    gap: 16px;
+    text-align: center;
+}
+
+/*Form text*/
+.title {
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #666;
+}
+
+/*Inputs box*/
+.form-container {
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #fff;
+    margin: 1rem 0 .5rem;
+    width: 100%;
+}
+
+
+.input {
+    background: none;
+    border: 0;
+    outline: 0;
+    height: 40px;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    font-size: .9rem;
+    padding: 8px 15px;
+}
+
+.form-section {
+    padding: 16px;
+    font-size: .85rem;
+    background-color: #e0ecfb;
+    box-shadow: rgb(0 0 0 / 8%) 0 -1px;
+}
+
+    .form-section a {
+        font-weight: bold;
+        color: #0066ff;
+        transition: color .3s ease;
+    }
+
+        .form-section a:hover {
+            color: #005ce6;
+            text-decoration: underline;
+        }
+
 h1 {
     margin-bottom: 10px; /* Adds space between the heading and the buttons */
 }
@@ -16,7 +83,7 @@ h1 {
 
 /* From Uiverse.io by gharsh11032000 */
 .card {
-    position: relative;
+    
     width: 350px;
     height: 250px;
     background-image: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100% );
@@ -131,15 +198,16 @@ h1 {
 .btn {
     display: block;
     margin: 10px auto;
-    width: 150px;
-    height: 60px;
-    border-radius: 50px;
+    padding: 10px 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 24px;
+    padding: 10px 16px;
     background-image: linear-gradient(135deg, #feb692 0%, #ea5455 100%);
     box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
     outline: none;
     cursor: pointer;
     border: none;
-    font-size: 24px;
     color: white;
 }
 

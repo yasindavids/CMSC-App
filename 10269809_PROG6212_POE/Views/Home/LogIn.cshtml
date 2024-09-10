@@ -1,0 +1,25 @@
+﻿@page
+@model _10269809_PROG6212_POE.Views.Home.LogInModel
+@{
+    ViewBag.Title = "Log In Page";
+}
+<div id="welcome">
+    <div class="form-box">
+        <form class="form">
+            <span class="title">Login</span>
+            <span class="subtitle">Log into your account.</span>
+            <div class="form-container">
+                <input type="email" class="input" placeholder="Email">
+                
+                <input type="password" class="input" placeholder="Password">
+            </div>
+            @using (Html.BeginForm("DashBoard", "Home", FormMethod.Post))
+            {
+                <button class="btn">Sign up</button>
+            }
+        </form>
+        <div class="form-section">
+            <p>Don't have an account? <a href="">Sign Up</a> </p>
+        </div>
+    </div>
+</div>
