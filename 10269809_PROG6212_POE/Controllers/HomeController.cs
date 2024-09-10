@@ -19,6 +19,11 @@ namespace _10269809_PROG6212_POE.Controllers
             return View();
         }
 
+        public ActionResult ManagerDash()
+        {
+            return View();
+        }
+
         public ActionResult SignUp()
         {
            
