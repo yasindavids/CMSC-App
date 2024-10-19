@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Dashboard";
 }
+
 <body>
 <div id="welcome">
     <div class="dash">
@@ -30,6 +31,7 @@
                     </svg>
                 </div>
                 <input type="file" id="file" asp-for="FileUpload" onchange="displayFileName(event)" />
+                    
                 <span id="fileName" class="file-name"></span>
             </label>
 
@@ -46,4 +48,7 @@
         }
     </script>
 
+
 </body>
+
+

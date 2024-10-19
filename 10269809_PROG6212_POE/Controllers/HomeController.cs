@@ -49,9 +49,11 @@ namespace _10269809_PROG6212_POE.Controllers
 
                 ClaimStorage.Claims.Add(claim);
 
-                return RedirectToAction("Index"); // Return to homepage if successful
+
+                return RedirectToAction("Index");  // Return to homepage if successful
             }
 
+            
             return View("Dashboard", model);  // Stay on Dashboard if unsuccessful
         }
 
