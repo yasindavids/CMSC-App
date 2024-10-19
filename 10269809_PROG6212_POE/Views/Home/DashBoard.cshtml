@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Dashboard";
 }
-
+<body>
 <div id="welcome">
     <div class="dash">
         <form asp-controller="Home" asp-action="SubmitClaim" method="post" enctype="multipart/form-data" class="form">
@@ -29,11 +29,21 @@
                         </g>
                     </svg>
                 </div>
-                <input type="file" id="file" name="FileUpload" />
+                <input type="file" id="file" asp-for="FileUpload" onchange="displayFileName(event)" />
+                <span id="fileName" class="file-name"></span>
             </label>
 
             <button type="submit" class="btn">Submit</button>
         </form>
+  
     </div>
 </div>
->
+    <script>
+        function displayFileName(event) {
+            const input = event.target;
+            const fileName = input.files[0] ? input.files[0].name : "No file selected"; 
+            document.getElementById('fileName').textContent = fileName; 
+        }
+    </script>
+
+</body>

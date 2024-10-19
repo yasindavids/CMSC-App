@@ -1,10 +1,39 @@
 ﻿@page
-@model _10269809_PROG6212_POE.Views.Home.ManagerDashModel
+
 @{
     ViewBag.Title = "ManagerDashboard";
 }
 
+
+@model IEnumerable<_10269809_PROG6212_POE.Models.DashBoardModel>
+
+
 <div id="welcome">
+    <div class="dash">
+        <span class="title">Claims</span>
+        <span class="subtitle">Select a claim to view contents</span>
+        <div class="file-explorer">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var claim in Model)
+                {
+                    <div class="file-item">
+                        <img src="path/to/icon.png" alt="File Icon">
+                        <span class="file-name">@claim.Notes</span> <!-- Use the property you want to display -->
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No claims available.</p>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+@* <div id="welcome">
     <div class="dash">
         <form class="form">
             <span class="title">Claims</span>
@@ -30,3 +59,4 @@
         </form>
     </div>
 </div>
+ *@

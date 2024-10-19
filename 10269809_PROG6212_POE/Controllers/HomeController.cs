@@ -1,5 +1,7 @@
 using _10269809_PROG6212_POE.Models;
+
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using System.Diagnostics;
 
 namespace _10269809_PROG6212_POE.Controllers
@@ -8,10 +10,12 @@ namespace _10269809_PROG6212_POE.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        [HttpGet]
-        public IActionResult Index()
+        private static readonly List<DashBoardModel> _claims = new List<DashBoardModel>();
+
+        public ActionResult DashBoard()
         {
-            return View();
+
+            return View(new DashBoardModel());
         }
 
         [HttpPost]
@@ -28,6 +32,10 @@ namespace _10269809_PROG6212_POE.Controllers
                         await model.FileUpload.CopyToAsync(stream);
                     }
                 }
+
+                model.UploadedFileName = model.FileUpload.FileName;
+
+                _claims.Add(model);
 
                 return RedirectToAction("DashBoard"); // This should redirect to the DashBoard action
             }
@@ -50,9 +58,11 @@ namespace _10269809_PROG6212_POE.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult ManagerDash()
         {
-            return View();
+
+            return View(_claims);
         }
 
         public ActionResult SignUp()
@@ -62,13 +72,12 @@ namespace _10269809_PROG6212_POE.Controllers
         }
 
         
-        public ActionResult DashBoard()
-        {
-          
-            return View(); 
-        }
+     
 
-       
+        public IActionResult Index()
+        {
+            return View();
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
