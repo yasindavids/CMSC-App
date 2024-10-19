@@ -1,7 +1,5 @@
 using _10269809_PROG6212_POE.Models;
-using _10269809_PROG6212_POE.Views.Home;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using System.Diagnostics;
 
 namespace _10269809_PROG6212_POE.Controllers
@@ -10,32 +8,34 @@ namespace _10269809_PROG6212_POE.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [HttpPost]
-        public async Task<IActionResult> Upload(DashBoardModel model)
+        public async Task<IActionResult> SubmitClaim(DashBoardModel model)
         {
             if (ModelState.IsValid)
             {
-                // Check if the file is not null and has content
                 if (model.FileUpload != null && model.FileUpload.Length > 0)
                 {
                     var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", model.FileUpload.FileName);
 
-                    // Using OpenReadStream() to read the file contents
-                    using (var stream = model.FileUpload.OpenReadStream())
+                    using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-                        using (var fileStream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await stream.CopyToAsync(fileStream);  
-                        }
+                        await model.FileUpload.CopyToAsync(stream);
                     }
                 }
 
-                return View("Success");
+                return RedirectToAction("DashBoard"); // This should redirect to the DashBoard action
             }
 
-
-            return View(model);
+            return View("Index", model); // Return to the view with the same model if there are validation errors
         }
+
+
 
 
 
@@ -68,10 +68,7 @@ namespace _10269809_PROG6212_POE.Controllers
             return View(); 
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+       
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

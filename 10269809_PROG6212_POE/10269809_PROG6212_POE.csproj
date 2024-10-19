@@ -7,4 +7,8 @@
     <RootNamespace>_10269809_PROG6212_POE</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\" />
+  </ItemGroup>
+
 </Project>
