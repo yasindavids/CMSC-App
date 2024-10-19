@@ -6,12 +6,8 @@
 <div id="welcome">
     <h1 class="display-4">Welcome to CMCS</h1>
     <br>
-    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
-    {
-        <button type="submit" class="btn">I am a lecturer</button>
-    }
-    @using (Html.BeginForm("Login", "Home", FormMethod.Post))
-    {
-        <button type="submit" class="btn">I am an academic manager</button>
-    }
+
+    <a href="@Url.Action("DashBoard", "Home")" class="btn">I am a lecturer</a>
+    <a href="@Url.Action("ManagerDash", "Home")" class="btn">I am an academic manager</a>
+
 </div>

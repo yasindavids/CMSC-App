@@ -40,8 +40,8 @@ textarea {
 
 /* From Uiverse.io by Yaya12085 */
 .custum-file-upload {
-    height: 200px;
-    width: 300px;
+    height: 100px;
+    width: 150px;
     display: flex;
     flex-direction: column;
     align-items: space-between;
@@ -63,7 +63,7 @@ textarea {
     }
 
         .custum-file-upload .icon svg {
-            height: 80px;
+            height: 30px;
             fill: rgba(75, 85, 99, 1);
         }
 
