@@ -3,17 +3,16 @@
 <div id="welcome">
     <div class="dash">
         <span class="title">Claims</span>
-        <span class="subtitle">Select a claim to view contents</span>
+
         <div class="file-explorer">
             <div class="file-explorer">
                 @foreach (var claim in Model)
                 {
                     <div class="file-item">
-                        <span class="file-name">Claim: @claim.FileName</span>
                         <span>Hours Worked: @claim.HoursWorked</span>
                         <span>Hourly Rate: @claim.HourlyRate</span>
                         <span>Additional Notes: @claim.Notes</span>
-                        <a href="@Url.Content("~/uploads/" + claim.FileName)" target="_blank">View File</a>
+                        <a href="@Url.Content("~/uploads/" + claim.FileName)" target="_blank">Open File</a>
                     </div>
                 }
             </div>
