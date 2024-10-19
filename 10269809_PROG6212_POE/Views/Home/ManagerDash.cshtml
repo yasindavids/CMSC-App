@@ -1,33 +1,23 @@
-﻿@page
-
-@{
-    ViewBag.Title = "ManagerDashboard";
-}
-
-
-@model IEnumerable<_10269809_PROG6212_POE.Models.DashBoardModel>
-
+﻿@model IEnumerable<Claim>
 
 <div id="welcome">
     <div class="dash">
         <span class="title">Claims</span>
         <span class="subtitle">Select a claim to view contents</span>
         <div class="file-explorer">
-            @if (Model != null && Model.Any())
-            {
-                foreach (var claim in Model)
+            <div class="file-explorer">
+                @foreach (var claim in Model)
                 {
                     <div class="file-item">
-                        <img src="path/to/icon.png" alt="File Icon">
-                        <span class="file-name">@claim.Notes</span> <!-- Use the property you want to display -->
+                        <span class="file-name">Claim: @claim.FileName</span>
+                        <span>Hours Worked: @claim.HoursWorked</span>
+                        <span>Hourly Rate: @claim.HourlyRate</span>
+                        <span>Additional Notes: @claim.Notes</span>
+                        <a href="@Url.Content("~/uploads/" + claim.FileName)" target="_blank">View File</a>
                     </div>
                 }
-            }
-            else
-            {
-                <p>No claims available.</p>
-            }
-        </div>
+            </div>
+
     </div>
 </div>
 

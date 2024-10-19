@@ -10,19 +10,21 @@ html {
 }
 
 .file-item {
-    text-align: center;
+    display: block; /* Each item takes full width */
+    text-align: left; /* Align text to the left */
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
-    width: 100px; /* Adjust width of each item */
+    margin: 10px 0; /* Add vertical spacing between items */
 }
 
     .file-item img {
-        width: 50px; /* Adjust icon size */
+        width: 50px; /* Icon size */
         height: 50px;
         margin-bottom: 10px;
     }
+
 
 .file-name {
     font-size: 14px;

@@ -10,7 +10,7 @@ namespace _10269809_PROG6212_POE.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private static readonly List<DashBoardModel> _claims = new List<DashBoardModel>();
+
 
         public ActionResult DashBoard()
         {
@@ -21,30 +21,39 @@ namespace _10269809_PROG6212_POE.Controllers
         [HttpPost]
         public async Task<IActionResult> SubmitClaim(DashBoardModel model)
         {
+            string fileName = null;
+            string filePath = null; // Declare a variable for the file path
             if (ModelState.IsValid)
             {
                 if (model.FileUpload != null && model.FileUpload.Length > 0)
                 {
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", model.FileUpload.FileName);
+                    fileName = model.FileUpload.FileName;
+                    filePath = Path.Combine("uploads", fileName); // Store relative path
+                    var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", filePath);
 
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         await model.FileUpload.CopyToAsync(stream);
                     }
                 }
 
-                model.UploadedFileName = model.FileUpload.FileName;
+                // Create a new Claim instance
+                var claim = new Claim
+                {
+                    HoursWorked = model.HoursWorked,
+                    HourlyRate = model.HourlyRate,
+                    Notes = model.Notes,
+                    FileName = fileName,
+                    FilePath = filePath // Store the relative path
+                };
 
-                _claims.Add(model);
+                ClaimStorage.Claims.Add(claim);
 
-                return RedirectToAction("DashBoard"); // This should redirect to the DashBoard action
+                return RedirectToAction("Index"); // Return to homepage if successful
             }
 
-            return View("Index", model); // Return to the view with the same model if there are validation errors
+            return View("Dashboard", model);  // Stay on Dashboard if unsuccessful
         }
-
-
-
 
 
         public HomeController(ILogger<HomeController> logger)
@@ -62,17 +71,18 @@ namespace _10269809_PROG6212_POE.Controllers
         public ActionResult ManagerDash()
         {
 
-            return View(_claims);
+            var claims = ClaimStorage.Claims;
+            return View(claims);
         }
 
         public ActionResult SignUp()
         {
-           
+            
             return View();
         }
 
-        
-     
+
+
 
         public IActionResult Index()
         {
