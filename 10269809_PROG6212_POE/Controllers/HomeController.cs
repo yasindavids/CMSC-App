@@ -18,44 +18,50 @@ namespace _10269809_PROG6212_POE.Controllers
             return View(new DashBoardModel());
         }
 
+
         [HttpPost]
         public async Task<IActionResult> SubmitClaim(DashBoardModel model)
         {
-            string fileName = null;
-            string filePath = null; // Declare a variable for the file path
             if (ModelState.IsValid)
             {
-                if (model.FileUpload != null && model.FileUpload.Length > 0)
+                // Validate file upload
+                if (model.FileUpload == null || model.FileUpload.Length == 0)
                 {
-                    fileName = model.FileUpload.FileName;
-                    filePath = Path.Combine("uploads", fileName); // Store relative path
+                    ModelState.AddModelError("FileUpload", "A file must be uploaded.");
+                }
+                else
+                {
+                    string fileName = model.FileUpload.FileName;
+                    string filePath = Path.Combine("uploads", fileName); // Relative path
                     var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", filePath);
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         await model.FileUpload.CopyToAsync(stream);
                     }
-                }
 
-                // Create a new Claim instance
-                var claim = new Claim
-                {
+                    // Create a new Claim instance
+                    var claim = new Claim
+                    {
+                   
                     HoursWorked = model.HoursWorked,
-                    HourlyRate = model.HourlyRate,
-                    Notes = model.Notes,
-                    FileName = fileName,
-                    FilePath = filePath // Store the relative path
-                };
+                        HourlyRate = model.HourlyRate,
+                        Notes = model.Notes,
+                        FileName = fileName,
+                        FilePath = filePath // Store relative path
+                    };
 
-                ClaimStorage.Claims.Add(claim);
+                    ClaimStorage.Claims.Add(claim);
 
-
-                return RedirectToAction("Index");  // Return to homepage if successful
+                    return RedirectToAction("Index");  // Redirect on success
+                }
             }
 
-            
-            return View("Dashboard", model);  // Stay on Dashboard if unsuccessful
+            // If validation fails, return the view with validation errors
+            return View("Dashboard", model);
         }
+
+
 
 
         public HomeController(ILogger<HomeController> logger)

@@ -6,8 +6,8 @@ namespace _10269809_PROG6212_POE.Models
 {
     public class DashBoardModel
     {
-        
-            [Required(ErrorMessage = "Please enter hours worked.")]
+        public int Id { get; set; } 
+        [Required(ErrorMessage = "Please enter hours worked.")]
             [Range(1, int.MaxValue, ErrorMessage = "Hours worked must be a number.")]
             public int HoursWorked { get; set; }
 
@@ -17,6 +17,7 @@ namespace _10269809_PROG6212_POE.Models
 
             public string Notes { get; set; }
 
+            [Required(ErrorMessage = "Please upload a file.")]
             public IFormFile FileUpload { get; set; }
 
 
