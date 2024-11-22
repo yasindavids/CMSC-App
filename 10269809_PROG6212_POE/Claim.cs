@@ -2,6 +2,7 @@
 {
     public class Claim
     {
+        public int Id { get; set; }
         public int HoursWorked { get; set; }
         public int HourlyRate { get; set; }
         public string Notes { get; set; }

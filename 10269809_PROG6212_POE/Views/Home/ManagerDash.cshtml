@@ -11,12 +11,18 @@
                     var totalPay = claim.HourlyRate * claim.HoursWorked;
 
                     <div class="file-item">
-                        <span>Hours Worked: @claim.HoursWorked</span>
-                        <span>Hourly Rate: @claim.HourlyRate</span>
-                        <span>Additional Notes: @claim.Notes</span>
-                        <span>Total Pay: @totalPay</span>
-                        <a href="@Url.Content("~/uploads/" + claim.FileName)" target="_blank">Open File</a>
+                        <span>Hours Worked: @claim.HoursWorked <br /></span>
+                        <span>Hourly Rate: @claim.HourlyRate <br /></span>
+                        <span>Additional Notes: @claim.Notes <br /></span>
+                        <span>Total Pay: @totalPay <br /></span>
+                        <a href="@Url.Content("~/uploads/" + claim.FileName)" target="_blank">Open Claim Notes</a>
 
+                        <form method="post" asp-controller="Home" asp-action="DownloadReport" asp-route-id="@claim.Id">
+                            <button class="btn" type="submit">Accept (Download Report)</button>
+                        </form>
+                        <form method="post" asp-controller="Home" asp-action="RejectClaim" asp-route-id="@claim.Id">
+                            <button class="btn" type="submit">Reject (Delete)</button>
+                        </form>
                     </div>
                 }
             </div>

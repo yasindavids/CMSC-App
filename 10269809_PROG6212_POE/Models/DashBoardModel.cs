@@ -6,8 +6,10 @@ namespace _10269809_PROG6212_POE.Models
 {
     public class DashBoardModel
     {
-        public int Id { get; set; } 
-        [Required(ErrorMessage = "Please enter hours worked.")]
+           
+
+
+            [Required(ErrorMessage = "Please enter hours worked.")]
             [Range(1, int.MaxValue, ErrorMessage = "Hours worked must be a number.")]
             public int HoursWorked { get; set; }
 
