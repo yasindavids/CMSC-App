@@ -28,6 +28,34 @@
     }
 
 
+.home-button {
+    transition: all 0.3s ease-in-out;
+    font-family: "Dosis", sans-serif;
+}
+.home-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    text-decoration: none;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-image: linear-gradient(135deg, #feb692 0%, #ea5455 100%);
+    box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
+    color: white;
+}
+
+    .home-button:hover {
+        transform: translateY(3px);
+        box-shadow: none;
+        color: black;
+    }
+    .home-button:active {
+        opacity: 0.5;
+        color: black;
+    }
 
 html {
     font-size: 14px;
@@ -142,7 +170,7 @@ textarea {
     text-align: center;
 }
 
-/*Form text*/
+
 .title {
     font-weight: bold;
     font-size: 1.6rem;
@@ -153,7 +181,7 @@ textarea {
     color: #666;
 }
 
-/*Inputs box*/
+
 .form-container {
     overflow: hidden;
     border-radius: 8px;
@@ -193,7 +221,7 @@ textarea {
         }
 
 h1 {
-    margin-bottom: 10px; /* Adds space between the heading and the buttons */
+    margin-bottom: 10px; 
 }
 
 #welcome {
@@ -204,7 +232,6 @@ h1 {
     height: 100vh;
 }
 
-/* From Uiverse.io by gharsh11032000 */
 .card {
     width: 350px;
     height: 250px;
@@ -310,7 +337,7 @@ h1 {
 }
 
 
-/* From Uiverse.io by Codecite */
+
 .btn {
     transition: all 0.3s ease-in-out;
     font-family: "Dosis", sans-serif;

@@ -4,28 +4,29 @@
     ViewBag.Title = "Dashboard";
 }
 
+
+<header>
+    <a href="~/Home/Index" class="home-button">Home</a>
+</header>
+
 <body>
     <div id="welcome">
         <div class="dash">
             <form asp-controller="Home" asp-action="SubmitClaim" method="post" enctype="multipart/form-data" class="form">
                 <span class="title">Submit a claim</span>
 
-                <!-- Hours Worked -->
                 <span class="subtitle">Hours worked</span>
                 <textarea rows="1" asp-for="HoursWorked"></textarea>
                 <span asp-validation-for="HoursWorked" class="text-danger"></span>
 
-                <!-- Hourly Rate -->
                 <span class="subtitle">Hourly rate</span>
                 <textarea rows="1" asp-for="HourlyRate"></textarea>
                 <span asp-validation-for="HourlyRate" class="text-danger"></span>
 
-                <!-- Additional Notes -->
                 <span class="subtitle">Additional notes.</span>
                 <textarea rows="5" asp-for="Notes"></textarea>
                 <span asp-validation-for="Notes" class="text-danger"></span>
 
-                <!-- File Upload -->
                 <label class="custum-file-upload" for="file">
                     <div class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
