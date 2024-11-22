@@ -27,11 +27,11 @@ namespace _10269809_PROG6212_POE.Controllers
 
             if (claim != null)
             {
-                // Remove the claim from the storage
+  
                 ClaimStorage.Claims.Remove(claim);
             }
 
-            return RedirectToAction("ManagerDash"); // Redirect to the manager dashboard
+            return RedirectToAction("ManagerDash"); 
         }
 
         [HttpPost]
@@ -41,11 +41,10 @@ namespace _10269809_PROG6212_POE.Controllers
 
             if (claim == null)
             {
-                // Handle error if the claim is not found
+             
                 return NotFound();
             }
 
-            // Create the content for the .txt report
             var reportContent = $"Claim Report\n\n" +
                                 $"Hours Worked: {claim.HoursWorked}\n" +
                                 $"Hourly Rate: {claim.HourlyRate}\n" +
@@ -53,10 +52,9 @@ namespace _10269809_PROG6212_POE.Controllers
                                 $"Additional Notes: {claim.Notes}\n" +
                                 $"File: {claim.FileName}";
 
-            // Convert the report content to a byte array
             var fileBytes = System.Text.Encoding.UTF8.GetBytes(reportContent);
 
-            // Return the file as a download with a .txt extension
+
             return File(fileBytes, "text/plain", $"{claim.Id}_Claim_Report.txt");
         }
 
@@ -65,40 +63,47 @@ namespace _10269809_PROG6212_POE.Controllers
         [HttpPost]
         public async Task<IActionResult> SubmitClaim(DashBoardModel model)
         {
+            string[] allowedExtensions = { ".doc", ".pdf", ".xlsx", ".docx", ".txt" };
+            string fileName = null;
+            string filePath = null;
+
             if (ModelState.IsValid)
             {
-                // Validate file upload
-                if (model.FileUpload == null || model.FileUpload.Length == 0)
+                if (model.FileUpload != null && model.FileUpload.Length > 0)
                 {
-                    ModelState.AddModelError("FileUpload", "A file must be uploaded.");
-                }
-                else
-                {
-                    string fileName = model.FileUpload.FileName;
-                    string filePath = Path.Combine("uploads", fileName);
+                    
+                    var fileExtension = Path.GetExtension(model.FileUpload.FileName).ToLower();
+
+                    
+                    if (!allowedExtensions.Contains(fileExtension))
+                    {
+                        ModelState.AddModelError("FileUpload", "Only .doc, .pdf, or .xlsx files are allowed.");
+                        return View("Dashboard", model); 
+                    }
+
+                    fileName = model.FileUpload.FileName;
+                    filePath = Path.Combine("uploads", fileName);
                     var fullPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", filePath);
 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         await model.FileUpload.CopyToAsync(stream);
                     }
-
-                    
-                    var claim = new Claim
-                    {
-                        Id = ++lastClaimId, 
-                        HoursWorked = model.HoursWorked,
-                        HourlyRate = model.HourlyRate,
-                        Notes = model.Notes,
-                        FileName = fileName,
-                        FilePath = filePath 
-                    };
-
-                    ClaimStorage.Claims.Add(claim);
-
-
-                    return RedirectToAction("Index");  
                 }
+
+                
+                var claim = new Claim
+                {
+                    HoursWorked = model.HoursWorked,
+                    HourlyRate = model.HourlyRate,
+                    Notes = model.Notes,
+                    FileName = fileName,
+                    FilePath = filePath
+                };
+
+                ClaimStorage.Claims.Add(claim);
+
+                return RedirectToAction("Index");
             }
 
             return View("Dashboard", model);

@@ -37,7 +37,8 @@
                             </g>
                         </svg>
                     </div>
-                    <input type="file" id="file" asp-for="FileUpload" onchange="displayFileName(event)" />
+                    <input type="file" id="file" asp-for="FileUpload" accept=".doc,.pdf,.xlsx" onchange="displayFileName(event)" />
+
                     <span asp-validation-for="FileUpload" class="text-danger"></span>
                     <span id="fileName" class="file-name"></span>
                 </label>
