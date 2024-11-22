@@ -8,10 +8,13 @@
             <div class="file-explorer">
                 @foreach (var claim in Model)
                 {
+                    var totalPay = claim.HourlyRate * claim.HoursWorked;
+
                     <div class="file-item">
                         <span>Hours Worked: @claim.HoursWorked</span>
                         <span>Hourly Rate: @claim.HourlyRate</span>
                         <span>Additional Notes: @claim.Notes</span>
+                        <span>Total Pay: @totalPay</span>
                         <a href="@Url.Content("~/uploads/" + claim.FileName)" target="_blank">Open File</a>
                     </div>
                 }
